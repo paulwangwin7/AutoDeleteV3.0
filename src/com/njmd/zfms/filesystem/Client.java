@@ -24,8 +24,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * "Ö´·¨¼ÇÂ¼ÒÇ"¹ÜÀíÏµÍ³Ö®¶¨Ê±É¾³ıÎÄ¼ş¿Í»§¶Ë
- * @author ËïÇ¿Î°
+ * "æ‰§æ³•è®°å½•ä»ª"ç®¡ç†ç³»ç»Ÿä¹‹å®šæ—¶åˆ é™¤æ–‡ä»¶å®¢æˆ·ç«¯
+ * @author å­™å¼ºä¼Ÿ
  * @version 0.0.1
  * @since 2013.05.29
  */
@@ -47,27 +47,27 @@ public class Client{
 	private static final String INTERVAL_FAILSRETRY="interval.failsRetry";
 	private static final String INTERVAL_EACHTIME="interval.eachTime";
 	
-	//Êı¾İ¿âÇı¶¯
+	//æ•°æ®åº“é©±åŠ¨
 	private String jdbcDriverName=null;
-	//Êı¾İ¿âÁ¬½ÓµØÖ·
+	//æ•°æ®åº“è¿æ¥åœ°å€
 	private String jdbcUrl=null;
-	//Êı¾İ¿âÓÃ»§Ãû
+	//æ•°æ®åº“ç”¨æˆ·å
 	private String jdbcUsername=null;
-	//Êı¾İ¿âÃÜÂë
+	//æ•°æ®åº“å¯†ç 
 	private String jdbcPassword=null;
-	//É¾³ıÈÎÎñÊ±,Ã¿´ÎÉ¾³ıÎÄ¼şµÄ¼ÇÂ¼Êı
+	//åˆ é™¤ä»»åŠ¡æ—¶,æ¯æ¬¡åˆ é™¤æ–‡ä»¶çš„è®°å½•æ•°
 	private String jdbcBatchSize=null;
-	//ÎÄ¼ş·şÎñÆ÷µÄIPµØÖ·,ÓÃÓÚ»ñÈ¡±¾»ú¿ÉÄÜ±£´æµÄ¼ÇÂ¼
+	//æ–‡ä»¶æœåŠ¡å™¨çš„IPåœ°å€,ç”¨äºè·å–æœ¬æœºå¯èƒ½ä¿å­˜çš„è®°å½•
 	private String fileServerIP=null;
 	
-	//ÔËĞĞ¹ı³ÌÖĞÁ¬½ÓÊı¾İ¿âÊ§°ÜÖ®ºóµÈ´ı¶à³¤Ê±¼äÖ®ºóÔÙÖ´ĞĞÉ¾³ıÈÎÎñ(µ¥Î»·ÖÖÓ)
+	//è¿è¡Œè¿‡ç¨‹ä¸­è¿æ¥æ•°æ®åº“å¤±è´¥ä¹‹åç­‰å¾…å¤šé•¿æ—¶é—´ä¹‹åå†æ‰§è¡Œåˆ é™¤ä»»åŠ¡(å•ä½åˆ†é’Ÿ)
 	private Integer intervalFailsRetry=null;
-	//±¾´ÎÉ¾³ıÈÎÎñÍê³ÉÖ®ºóÓëÏÂ´ÎÔËĞĞÉ¾³ıÈÎÎñÖ®ºóµÄµÈ´ıÊ±¼ä(µ¥Î»·ÖÖÓ)
+	//æœ¬æ¬¡åˆ é™¤ä»»åŠ¡å®Œæˆä¹‹åä¸ä¸‹æ¬¡è¿è¡Œåˆ é™¤ä»»åŠ¡ä¹‹åçš„ç­‰å¾…æ—¶é—´(å•ä½åˆ†é’Ÿ)
 	private Integer intervalEachTime=null;
 	
 	/**
-	 * ³ÌĞòÔËĞĞµÄ¹ı³ÌÖĞ»áÉú³É.lockËøÎÄ¼ş,µ±ĞÂ³ÌĞòÊµÀıÔËĞĞÊ±»áÊÔ×Å»ñÈ¡.lockÎÄ¼şµÄËø,
-	 * Èç¹û»ñÈ¡²»µ½Ëø£¬ÔòËµÃ÷ÓĞÁíÍâÒ»¸ö³ÌĞòÊµÀıÔÚÔËĞĞ£¬´ËÊ±±¾ÊµÀı¾ÍÖ±½ÓÍË³ö.
+	 * ç¨‹åºè¿è¡Œçš„è¿‡ç¨‹ä¸­ä¼šç”Ÿæˆ.locké”æ–‡ä»¶,å½“æ–°ç¨‹åºå®ä¾‹è¿è¡Œæ—¶ä¼šè¯•ç€è·å–.lockæ–‡ä»¶çš„é”,
+	 * å¦‚æœè·å–ä¸åˆ°é”ï¼Œåˆ™è¯´æ˜æœ‰å¦å¤–ä¸€ä¸ªç¨‹åºå®ä¾‹åœ¨è¿è¡Œï¼Œæ­¤æ—¶æœ¬å®ä¾‹å°±ç›´æ¥é€€å‡º.
 	 */
 	public void lockFile(){
 		try {
@@ -79,85 +79,85 @@ public class Client{
 			FileLock lock = channel.tryLock();
 
 			 if (lock == null) {
-			     // Èç¹ûÃ»ÓĞµÃµ½Ëø£¬Ôò³ÌĞòÍË³ö.
-			     // Ã»ÓĞ±ØÒªÊÖ¶¯ÊÍ·ÅËøºÍ¹Ø±ÕÁ÷£¬µ±³ÌĞòÍË³öÊ±£¬ËûÃÇ»á±»¹Ø±ÕµÄ.
+			     // å¦‚æœæ²¡æœ‰å¾—åˆ°é”ï¼Œåˆ™ç¨‹åºé€€å‡º.
+			     // æ²¡æœ‰å¿…è¦æ‰‹åŠ¨é‡Šæ”¾é”å’Œå…³é—­æµï¼Œå½“ç¨‹åºé€€å‡ºæ—¶ï¼Œä»–ä»¬ä¼šè¢«å…³é—­çš„.
 			     throw new Exception("An instance of the application is running.");
 			 }
 		} catch (Exception e) {
-			logger.error("¼ì²âµ½¿ÉÄÜÓĞÁíÍâÒ»¸ö³ÌĞòÊµÀıÕıÔÚÔËĞĞ»òÕßÉÏÒ»´ÎÔËĞĞÃ»ÓĞÕı³£¹Ø±Õ,Çë¼ì²éÍ¬Ä¿Â¼ÏÂÊÇ·ñ´æÔÚ.lockÎÄ¼ş,Èç¹û´æÔÚÔòÖ±½ÓÉ¾³ıÖ®ºóÔÙÔËĞĞ±¾³ÌĞò,Èç¹ûÃ»ÓĞÔòÔÙ´ÎÔËĞĞ±¾³ÌĞò¼´¿É...");
+			logger.error("æ£€æµ‹åˆ°å¯èƒ½æœ‰å¦å¤–ä¸€ä¸ªç¨‹åºå®ä¾‹æ­£åœ¨è¿è¡Œæˆ–è€…ä¸Šä¸€æ¬¡è¿è¡Œæ²¡æœ‰æ­£å¸¸å…³é—­,è¯·æ£€æŸ¥åŒç›®å½•ä¸‹æ˜¯å¦å­˜åœ¨.lockæ–‡ä»¶,å¦‚æœå­˜åœ¨åˆ™ç›´æ¥åˆ é™¤ä¹‹åå†è¿è¡Œæœ¬ç¨‹åº,å¦‚æœæ²¡æœ‰åˆ™å†æ¬¡è¿è¡Œæœ¬ç¨‹åºå³å¯...");
 			System.exit(0);
 		}
 	}
 	
 	/**
-	 * ½øĞĞÏµÍ³ÖĞµÄÏà¹Ø²ÎÊı½øĞĞ³õÊ¼»¯²¢½øĞĞÑéÖ¤.
+	 * è¿›è¡Œç³»ç»Ÿä¸­çš„ç›¸å…³å‚æ•°è¿›è¡Œåˆå§‹åŒ–å¹¶è¿›è¡ŒéªŒè¯.
 	 */
 	public void init(){
 		logger.info("********************************************");
-		logger.info("\"Ö´·¨¼ÇÂ¼ÒÇ\"¹ÜÀíÏµÍ³Ö®¶¨Ê±É¾³ıÎÄ¼ş¿Í»§¶Ë¿ªÊ¼Æô¶¯...");
+		logger.info("\"æ‰§æ³•è®°å½•ä»ª\"ç®¡ç†ç³»ç»Ÿä¹‹å®šæ—¶åˆ é™¤æ–‡ä»¶å®¢æˆ·ç«¯å¼€å§‹å¯åŠ¨...");
 		logger.info("********************************************");
-		logger.info("ÏµÍ³ÕıÔÚ½øĞĞ¼ì²é,ÇëÉÔºó...");
+		logger.info("ç³»ç»Ÿæ­£åœ¨è¿›è¡Œæ£€æŸ¥,è¯·ç¨å...");
 
 		lockFile();
 		
-		logger.info("ÏµÍ³ÕıÔÚ³õÊ¼»¯ÅäÖÃ²ÎÊı...");
+		logger.info("ç³»ç»Ÿæ­£åœ¨åˆå§‹åŒ–é…ç½®å‚æ•°...");
 		
-		//¶ÁÈ¡ÅäÖÃÎÄ¼ş
+		//è¯»å–é…ç½®æ–‡ä»¶
 		Properties props=new Properties();
 		try{
 			File file=new File("conf/application.properties");
 			InputStream in=(InputStream) new FileInputStream(file);
 			props.load(in);
-			logger.info("ÏµÍ³³É¹¦ÕÒµ½[conf/application.properties]ÅäÖÃÎÄ¼ş...");
+			logger.info("ç³»ç»ŸæˆåŠŸæ‰¾åˆ°[conf/application.properties]é…ç½®æ–‡ä»¶...");
 		}catch(IOException e){
-			logger.error("ÏµÍ³Î´ÕÒµ½[conf/application.properties]ÅäÖÃÎÄ¼ş,³ÌĞò×Ô¶¯ÍË³ö...");
+			logger.error("ç³»ç»Ÿæœªæ‰¾åˆ°[conf/application.properties]é…ç½®æ–‡ä»¶,ç¨‹åºè‡ªåŠ¨é€€å‡º...");
 			System.exit(0);
 		}
 		
 		jdbcDriverName=props.getProperty(JDBC_DRIVERNAME, "").trim();
 		if("".equals(jdbcDriverName)){
-			logger.error("¶ÁÈ¡ÅäÖÃÎÄ¼şÄÚÈİ³ö´í,³ÌĞò×Ô¶¯ÍË³ö,ÇëÄúÈ·ÈÏÊÇ·ñÉèÖÃÁËjdbc.driverNameµÄÖµ...");
+			logger.error("è¯»å–é…ç½®æ–‡ä»¶å†…å®¹å‡ºé”™,ç¨‹åºè‡ªåŠ¨é€€å‡º,è¯·æ‚¨ç¡®è®¤æ˜¯å¦è®¾ç½®äº†jdbc.driverNameçš„å€¼...");
 			System.exit(0);
 		}
 		
 		jdbcUrl=props.getProperty(JDBC_URL,"").trim();
 		if("".equals(jdbcUrl)){
-			logger.error("¶ÁÈ¡ÅäÖÃÎÄ¼şÄÚÈİ³ö´í,³ÌĞò×Ô¶¯ÍË³ö,ÇëÄúÈ·ÈÏÊÇ·ñÉèÖÃÁËjdbc.urlµÄÖµ...");
+			logger.error("è¯»å–é…ç½®æ–‡ä»¶å†…å®¹å‡ºé”™,ç¨‹åºè‡ªåŠ¨é€€å‡º,è¯·æ‚¨ç¡®è®¤æ˜¯å¦è®¾ç½®äº†jdbc.urlçš„å€¼...");
 			System.exit(0);
 		}
 		
 		jdbcUsername=props.getProperty(JDBC_USERNAME,"").trim();
 		if("".equals(jdbcUsername)){
-			logger.error("¶ÁÈ¡ÅäÖÃÎÄ¼şÄÚÈİ³ö´í,³ÌĞò×Ô¶¯ÍË³ö,ÇëÄúÈ·ÈÏÊÇ·ñÉèÖÃÁËjdbc.usernameµÄÖµ...");
+			logger.error("è¯»å–é…ç½®æ–‡ä»¶å†…å®¹å‡ºé”™,ç¨‹åºè‡ªåŠ¨é€€å‡º,è¯·æ‚¨ç¡®è®¤æ˜¯å¦è®¾ç½®äº†jdbc.usernameçš„å€¼...");
 			System.exit(0);
 		}
 		
 		jdbcPassword=props.getProperty(JDBC_PASSWORD,"").trim();
 		if("".equals(jdbcPassword)){
-			logger.error("¶ÁÈ¡ÅäÖÃÎÄ¼şÄÚÈİ³ö´í,³ÌĞò×Ô¶¯ÍË³ö,ÇëÄúÈ·ÈÏÊÇ·ñÉèÖÃÁËjdbc.passwordµÄÖµ...");
+			logger.error("è¯»å–é…ç½®æ–‡ä»¶å†…å®¹å‡ºé”™,ç¨‹åºè‡ªåŠ¨é€€å‡º,è¯·æ‚¨ç¡®è®¤æ˜¯å¦è®¾ç½®äº†jdbc.passwordçš„å€¼...");
 			System.exit(0);
 		}
 		
 		jdbcBatchSize=props.getProperty(JDBC_BATCHSIZE,""+Integer.MAX_VALUE).trim();
 		if(!isDigits(jdbcBatchSize)){
-			logger.error("¶ÁÈ¡ÅäÖÃÎÄ¼şÄÚÈİ³ö´í,³ÌĞò×Ô¶¯ÍË³ö,ÇëÄúÈ·ÈÏjdbc.passwordµÄÖµÊÇ·ñÎªÊı×Ö...");
+			logger.error("è¯»å–é…ç½®æ–‡ä»¶å†…å®¹å‡ºé”™,ç¨‹åºè‡ªåŠ¨é€€å‡º,è¯·æ‚¨ç¡®è®¤jdbc.passwordçš„å€¼æ˜¯å¦ä¸ºæ•°å­—...");
 			System.exit(0);
 		}
 		
 		fileServerIP=props.getProperty(FILESERVER_IP,"").trim();
 		if("".equals(fileServerIP)){
-			logger.error("¶ÁÈ¡ÅäÖÃÎÄ¼şÄÚÈİ³ö´í,³ÌĞò×Ô¶¯ÍË³ö,ÇëÄúÈ·ÈÏÊÇ·ñÉèÖÃÁËfileserver.ipµÄÖµ...");
+			logger.error("è¯»å–é…ç½®æ–‡ä»¶å†…å®¹å‡ºé”™,ç¨‹åºè‡ªåŠ¨é€€å‡º,è¯·æ‚¨ç¡®è®¤æ˜¯å¦è®¾ç½®äº†fileserver.ipçš„å€¼...");
 			System.exit(0);
 		}
 			
 		String tmpIntervalFailsRetry=props.getProperty(INTERVAL_FAILSRETRY,"5").trim();
 		if("".equals(tmpIntervalFailsRetry)){
-			logger.error("¶ÁÈ¡ÅäÖÃÎÄ¼şÄÚÈİ³ö´í,³ÌĞò×Ô¶¯ÍË³ö,ÇëÄúÈ·ÈÏÊÇ·ñÉèÖÃÁËinterval.failsRetryµÄÖµ...");
+			logger.error("è¯»å–é…ç½®æ–‡ä»¶å†…å®¹å‡ºé”™,ç¨‹åºè‡ªåŠ¨é€€å‡º,è¯·æ‚¨ç¡®è®¤æ˜¯å¦è®¾ç½®äº†interval.failsRetryçš„å€¼...");
 			System.exit(0);
 		}
 		
 		if(!isDigits(tmpIntervalFailsRetry)){
-			logger.error("¶ÁÈ¡ÅäÖÃÎÄ¼şÄÚÈİ³ö´í,³ÌĞò×Ô¶¯ÍË³ö,ÇëÄúÈ·ÈÏinterval.failsRetryµÄÖµÊÇ·ñÎªÊı×Ö...");
+			logger.error("è¯»å–é…ç½®æ–‡ä»¶å†…å®¹å‡ºé”™,ç¨‹åºè‡ªåŠ¨é€€å‡º,è¯·æ‚¨ç¡®è®¤interval.failsRetryçš„å€¼æ˜¯å¦ä¸ºæ•°å­—...");
 			System.exit(0);
 		}
 		
@@ -165,35 +165,35 @@ public class Client{
 		
 		String tmpIntervalEachTime=props.getProperty(INTERVAL_EACHTIME,"5").trim();
 		if("".equals(tmpIntervalEachTime)){
-			logger.error("¶ÁÈ¡ÅäÖÃÎÄ¼şÄÚÈİ³ö´í,³ÌĞò×Ô¶¯ÍË³ö,ÇëÄúÈ·ÈÏÊÇ·ñÉèÖÃÁËinterval.eachTimeµÄÖµ...");
+			logger.error("è¯»å–é…ç½®æ–‡ä»¶å†…å®¹å‡ºé”™,ç¨‹åºè‡ªåŠ¨é€€å‡º,è¯·æ‚¨ç¡®è®¤æ˜¯å¦è®¾ç½®äº†interval.eachTimeçš„å€¼...");
 			System.exit(0);
 		}
 		
 		if(!isDigits(tmpIntervalEachTime)){
-			logger.error("¶ÁÈ¡ÅäÖÃÎÄ¼şÄÚÈİ³ö´í,³ÌĞò×Ô¶¯ÍË³ö,ÇëÄúÈ·ÈÏinterval.eachTimeµÄÖµÊÇ·ñÎªÊı×Ö...");
+			logger.error("è¯»å–é…ç½®æ–‡ä»¶å†…å®¹å‡ºé”™,ç¨‹åºè‡ªåŠ¨é€€å‡º,è¯·æ‚¨ç¡®è®¤interval.eachTimeçš„å€¼æ˜¯å¦ä¸ºæ•°å­—...");
 			System.exit(0);
 		}
 		
 		intervalEachTime=Integer.valueOf(tmpIntervalEachTime);
 		
-		logger.info("ÏµÍ³¶ÁÈ¡[conf/application.properties]ÅäÖÃÎÄ¼şĞÅÏ¢³É¹¦...");
+		logger.info("ç³»ç»Ÿè¯»å–[conf/application.properties]é…ç½®æ–‡ä»¶ä¿¡æ¯æˆåŠŸ...");
 		
 	}
 	
 	/**
-	 * ¼ÓÔØÊı¾İ¿âÇı¶¯
+	 * åŠ è½½æ•°æ®åº“é©±åŠ¨
 	 */
 	public void loadDriver(){
 		try {
 			Class.forName(jdbcDriverName);
 		} catch (ClassNotFoundException e) {
-			logger.error("¼ÓÔØÊı¾İ¿âÇı¶¯Ê§°Ü,³ÌĞò×Ô¶¯ÍË³ö,ÇëÊ¹ÓÃÄ¿Ç°Ö§³ÖµÄOracleÊı¾İ¿â...");
+			logger.error("åŠ è½½æ•°æ®åº“é©±åŠ¨å¤±è´¥,ç¨‹åºè‡ªåŠ¨é€€å‡º,è¯·ä½¿ç”¨ç›®å‰æ”¯æŒçš„Oracleæ•°æ®åº“...");
 			System.exit(0);
 		}
 	}
 	
 	/**
-	 * ¶ÔÅäÖÃµÄÊı¾İ¿âÏà¹ØĞÅÏ¢½øĞĞ¼ì²âÁ¬½Ó
+	 * å¯¹é…ç½®çš„æ•°æ®åº“ç›¸å…³ä¿¡æ¯è¿›è¡Œæ£€æµ‹è¿æ¥
 	 */
 	public void testConnection(){
 		Connection conn =null;
@@ -201,13 +201,13 @@ public class Client{
 			conn=DriverManager.getConnection(jdbcUrl,jdbcUsername,jdbcPassword);
 			conn.close();
 		} catch (SQLException e) {
-			logger.error("Á¬½ÓÊı¾İ¿âÊ§°Ü,³ÌĞò×Ô¶¯ÍË³ö,ÇëÈ·ÈÏÄúÉèÖÃµÄÊı¾İ¿âÓÃ»§ÃûºÍÃÜÂëÊÇ·ñÕıÈ·...");
+			logger.error("è¿æ¥æ•°æ®åº“å¤±è´¥,ç¨‹åºè‡ªåŠ¨é€€å‡º,è¯·ç¡®è®¤æ‚¨è®¾ç½®çš„æ•°æ®åº“ç”¨æˆ·åå’Œå¯†ç æ˜¯å¦æ­£ç¡®...");
 			System.exit(0);
 		}
 	}
 	
 	/**
-	 * ×¢²áÏµÍ³¹Ø±Õhook
+	 * æ³¨å†Œç³»ç»Ÿå…³é—­hook
 	 */
 	public void registerShutdownHook(){
 		if(shutdownHook==null){
@@ -217,7 +217,7 @@ public class Client{
 	}
 	
 	/**
-	 * ¿ªÆôÎÄ¼şÉ¾³ıÏß³Ì
+	 * å¼€å¯æ–‡ä»¶åˆ é™¤çº¿ç¨‹
 	 */
 	public void start(){
 		executor=Executors.newSingleThreadScheduledExecutor();
@@ -239,19 +239,19 @@ public class Client{
     }
 	
     /**
-     * JVM¹Ø±ÕhookÏß³Ì£¬µ±ÔÚÃüÁîĞĞ´°¿ÚÖĞ°´ÏÂctrl+CÖĞ¶Ï³ÌĞòÖ´ĞĞÊ±£¬»áÖ´ĞĞĞ©·½·¨£¬µ«ÊÇ
-     * ²»ÊÇ¶ÔÖ±½Ó¹Ø±Õ´°¿Ú½øĞĞHook
+     * JVMå…³é—­hookçº¿ç¨‹ï¼Œå½“åœ¨å‘½ä»¤è¡Œçª—å£ä¸­æŒ‰ä¸‹ctrl+Cä¸­æ–­ç¨‹åºæ‰§è¡Œæ—¶ï¼Œä¼šæ‰§è¡Œäº›æ–¹æ³•ï¼Œä½†æ˜¯
+     * ä¸æ˜¯å¯¹ç›´æ¥å…³é—­çª—å£è¿›è¡ŒHook
      *
      */
 	protected class ShutdownHook extends Thread{
 		public void run(){
 			try{
-				logger.info("ÏµÍ³ÕıÔÚÍË³ö,ÇëÉÔºó...");
+				logger.info("ç³»ç»Ÿæ­£åœ¨é€€å‡º,è¯·ç¨å...");
 				if(null!=t)
-					t.setStop(true); //ÉèÖÃÏß³ÌÍË³ö±êÖ¾
+					t.setStop(true); //è®¾ç½®çº¿ç¨‹é€€å‡ºæ ‡å¿—
 				if(null!=executor)
 					executor.shutdown();	
-				logger.info("ÏµÍ³ÒÑÍË³ö...");
+				logger.info("ç³»ç»Ÿå·²é€€å‡º...");
 			}catch(Throwable ex){
 				ex.printStackTrace();
 			}finally{
@@ -261,13 +261,13 @@ public class Client{
 	}
 
 	/**
-	 * ÎÄ¼şÉ¾³ıÏß³Ì£¬ÆäÁ÷³ÌÊÇÏÈ¶ÔÎÄ¼ş·ÖÀà½øĞĞ»ñµÃ£¬ÔÙ¸ù¾İÆä¹ıÆÚÊ±¼ä»ñÈ¡ÒÑ¾­¹ıÆÚµÄÎÄ¼ş¼ÇÂ¼£¬
-	 * Èç¹û´æÔÚ¾ÍÉ¾³ıÏà¹ØÎÄ¼ş¼°¸üĞÂÎÄ¼ş¼ÇÂ¼×´Ì¬
+	 * æ–‡ä»¶åˆ é™¤çº¿ç¨‹ï¼Œå…¶æµç¨‹æ˜¯å…ˆå¯¹æ–‡ä»¶åˆ†ç±»è¿›è¡Œè·å¾—ï¼Œå†æ ¹æ®å…¶è¿‡æœŸæ—¶é—´è·å–å·²ç»è¿‡æœŸçš„æ–‡ä»¶è®°å½•ï¼Œ
+	 * å¦‚æœå­˜åœ¨å°±åˆ é™¤ç›¸å…³æ–‡ä»¶åŠæ›´æ–°æ–‡ä»¶è®°å½•çŠ¶æ€
 	 *
 	 */
 	protected class DeleteThread  implements Runnable{
 		
-		//ÊÇ·ñ½áÊø±êÖ¾
+		//æ˜¯å¦ç»“æŸæ ‡å¿—
 		private boolean isStop=false;
 		
 		public void setStop(boolean isStop) {
@@ -276,13 +276,15 @@ public class Client{
 		
 		@Override
 		public void run() {
+			boolean flag=true;
 			while(!isStop){
-				logger.info("Ö´ĞĞÉ¾³ıÈÎÎñ...");
+				flag=true;
+				logger.info("æ‰§è¡Œåˆ é™¤ä»»åŠ¡...");
 			 	
 				Connection conn=null;
 				ResultSet rs=null;
 				try {
-					//»ñÈ¡ÎÄ¼ş·ÖÀàÁĞ±í
+					//è·å–æ–‡ä»¶åˆ†ç±»åˆ—è¡¨
 					Map<String,Integer> types=new HashMap<String,Integer>();
 					conn=DriverManager.getConnection(jdbcUrl,jdbcUsername,jdbcPassword);
 					rs=conn.createStatement().executeQuery("select * from file_type_info where valid_time > 0");
@@ -298,9 +300,9 @@ public class Client{
 			 			int total=0;
 			 			int error=0;
 			 			StringBuilder sb=new StringBuilder();
-			 			//¶Ô·ÖÀà·Ö±ğ½øĞĞÎÄ¼şÉ¾³ı²Ù×÷
+			 			//å¯¹åˆ†ç±»åˆ†åˆ«è¿›è¡Œæ–‡ä»¶åˆ é™¤æ“ä½œ
 			 			for(Map.Entry<String, Integer> entry:types.entrySet()){
-			 				//¸ù¾İµ±Ç°ÈÕÆÚÒÔ¼°¹ıÆÚÌìÊı»ñµÃ¹ıÆÚµÄÊ±¼ä
+			 				//æ ¹æ®å½“å‰æ—¥æœŸä»¥åŠè¿‡æœŸå¤©æ•°è·å¾—è¿‡æœŸçš„æ—¶é—´
 			 				Calendar calendar=Calendar.getInstance();
 			 				calendar.add(Calendar.DAY_OF_MONTH, 0-entry.getValue());
 			 				SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -320,60 +322,38 @@ public class Client{
 			 					
 				 				String fileSavePath=rs.getString("file_save_path");
 				 				fileSavePath=fileStorageRoot+fileSavePath;
-				 				try{
-					 				if(new File(fileSavePath).exists()){
-					 					new File(fileSavePath).delete();
-					 				}
-					 				logger.info("ÏµÍ³ÌáÊ¾:ÎÄ¼ş["+fileSavePath+"]É¾³ı³É¹¦,ÆäÎÄ¼ş¼ÇÂ¼Îª["+rs.getString("file_id")+"]!");
-				 				}catch(Exception e){
-				 					logger.info("ÏµÍ³ÌáÊ¾:ÎÄ¼ş["+fileSavePath+"]É¾³ıÊ§°Ü,ÆäÎÄ¼ş¼ÇÂ¼Îª["+rs.getString("file_id")+"]!");
-				 					throw e;
-				 				}
+				 				deleteFile(rs.getString("file_id"), fileSavePath);
+				 				
 			 				
 				 				String filePlayPath=rs.getString("file_play_path");
 				 				filePlayPath=fileStorageRoot+filePlayPath;
-				 				try{
-					 				if(new File(filePlayPath).exists()){
-					 					new File(filePlayPath).delete();
-					 				}
-					 				logger.info("ÏµÍ³ÌáÊ¾:ÎÄ¼ş["+filePlayPath+"]É¾³ı³É¹¦,ÆäÎÄ¼ş¼ÇÂ¼Îª["+rs.getString("file_id")+"]!");
-				 				}catch(Exception e){
-				 					logger.info("ÏµÍ³ÌáÊ¾:ÎÄ¼ş["+fileSavePath+"]É¾³ıÊ§°Ü,ÆäÎÄ¼ş¼ÇÂ¼Îª["+rs.getString("file_id")+"]!");
-				 					throw e;
-				 				}
+				 				deleteFile(rs.getString("file_id"), filePlayPath);
 			 				
 				 				String fileShowPath=rs.getString("file_show_path");
 				 				fileShowPath=fileStorageRoot+fileShowPath;
-				 				try{
-					 				if(new File(fileShowPath).exists()){
-					 					new File(fileShowPath).delete();
-					 				}
-					 				logger.info("ÏµÍ³ÌáÊ¾:ÎÄ¼ş["+fileShowPath+"]É¾³ı³É¹¦,ÆäÎÄ¼ş¼ÇÂ¼Îª["+rs.getString("file_id")+"]!");
-				 				}catch(Exception e){
-				 					logger.info("ÏµÍ³ÌáÊ¾:ÎÄ¼ş["+fileShowPath+"]É¾³ıÊ§°Ü,ÆäÎÄ¼ş¼ÇÂ¼Îª["+rs.getString("file_id")+"]!");
-				 					throw e;
-				 				}
+				 				deleteFile(rs.getString("file_id"), fileShowPath);
 			 				
 				 				try {
 									conn.createStatement().execute("update file_upload_info set delete_by='0' , delete_time='"+new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+"' , file_status='U' where file_id='"+rs.getString("file_id")+"'");
-									logger.info("ÏµÍ³ÌáÊ¾:¸üĞÂÎÄ¼ş¼ÇÂ¼["+rs.getString("file_id")+"]ÎªÊ§Ğ§×´Ì¬µÄ²Ù×÷Ö´ĞĞ³É¹¦!");
+									logger.info("ç³»ç»Ÿæç¤º:æ›´æ–°æ–‡ä»¶è®°å½•["+rs.getString("file_id")+"]ä¸ºå¤±æ•ˆçŠ¶æ€çš„æ“ä½œæ‰§è¡ŒæˆåŠŸ!");
 				 				} catch (Exception e) {
-				 					logger.error("ÏµÍ³ÌáÊ¾:¸üĞÂÎÄ¼ş¼ÇÂ¼["+rs.getString("file_id")+"]ÎªÊ§Ğ§×´Ì¬µÄ²Ù×÷Ö´ĞĞÊ§°Ü!");
+				 					logger.error("ç³»ç»Ÿæç¤º:æ›´æ–°æ–‡ä»¶è®°å½•["+rs.getString("file_id")+"]ä¸ºå¤±æ•ˆçŠ¶æ€çš„æ“ä½œæ‰§è¡Œå¤±è´¥!");
 				 					throw e;
 				 				}
 			 				
 			 				}catch(Exception e){
+			 					e.printStackTrace();
 			 					error++;
 			 				}
 			 			}
 			 			try { rs.close(); } catch (Exception e) {}
-			 			logger.info("ÏµÍ³ÌáÊ¾:±¾´ÎÖ´ĞĞÉ¾³ıÈÎÎñ,Ò»¹²²éÑ¯µ½ĞèÒªÉ¾³ı"+total+"Ìõ¼ÇÂ¼,ÆäÖĞ"+error+"Ìõ¼ÇÂ¼É¾³ıÊ§°Ü!");
+			 			logger.info("ç³»ç»Ÿæç¤º:æœ¬æ¬¡æ‰§è¡Œåˆ é™¤ä»»åŠ¡,ä¸€å…±æŸ¥è¯¢åˆ°éœ€è¦åˆ é™¤"+total+"æ¡è®°å½•,å…¶ä¸­"+error+"æ¡è®°å½•åˆ é™¤å¤±è´¥!");
 			 		}else{
-			 			logger.info("ÏµÍ³ÌáÊ¾:±¾´ÎÖ´ĞĞÉ¾³ıÈÎÎñ,Ã»ÓĞ·¢ÏÖĞèÒªÉ¾³ıµÄÎÄ¼ş¼ÇÂ¼!");
+			 			logger.info("ç³»ç»Ÿæç¤º:æœ¬æ¬¡æ‰§è¡Œåˆ é™¤ä»»åŠ¡,æ²¡æœ‰å‘ç°éœ€è¦åˆ é™¤çš„æ–‡ä»¶è®°å½•!");
 			 		}
 				} catch (SQLException e) {
 					e.printStackTrace();
-					logger.error("²éÑ¯Êı¾İ¿âĞÅÏ¢Ê§°Ü,Çë¼ì²éÊı¾İ¿â·şÎñÆ÷µÄ×´Ì¬,ÏµÍ³½«ÔÚ"+intervalFailsRetry+"·ÖÖÓÖ®ºóÔÙÊÔ...");
+					logger.error("æŸ¥è¯¢æ•°æ®åº“ä¿¡æ¯å¤±è´¥,è¯·æ£€æŸ¥æ•°æ®åº“æœåŠ¡å™¨çš„çŠ¶æ€,ç³»ç»Ÿå°†åœ¨"+intervalFailsRetry+"åˆ†é’Ÿä¹‹åå†è¯•...");
 					int tmp=intervalFailsRetry*60;
 					while(!isStop && tmp>0){
 						try {
@@ -382,9 +362,10 @@ public class Client{
 						} finally{
 							tmp--;
 							if(tmp % 60 ==0)
-								logger.error("²éÑ¯Êı¾İ¿âĞÅÏ¢Ê§°Ü,Çë¼ì²éÊı¾İ¿â·şÎñÆ÷µÄ×´Ì¬,ÏµÍ³½«ÔÚ"+(tmp/60)+"·ÖÖÓÖ®ºóÔÙÊÔ...");
+								logger.error("æŸ¥è¯¢æ•°æ®åº“ä¿¡æ¯å¤±è´¥,è¯·æ£€æŸ¥æ•°æ®åº“æœåŠ¡å™¨çš„çŠ¶æ€,ç³»ç»Ÿå°†åœ¨"+(tmp/60)+"åˆ†é’Ÿä¹‹åå†è¯•...");
 						}
 					}
+					flag=false;
 				}finally{
 					if(null!=conn)
 						try{ conn.close(); }catch(Exception e){}
@@ -392,25 +373,44 @@ public class Client{
 					if(null!=rs)
 						try{ rs.close(); }catch(Exception e){}
 				}
-				int tmp=intervalEachTime*60;
-				logger.info("±¾´ÎÖ´ĞĞÉ¾³ıÈÎÎñÍê³É,ÏÂ´ÎÖ´ĞĞÉ¾³ıÈÎÎñ½«ÔÚ"+(tmp/60)+"·ÖÖÓÖ®ºóÖ´ĞĞ...");
-				while(!isStop && tmp>0){
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e1) {
-					} finally{
-						tmp--;
-						if(tmp % 60 ==0)
-							logger.info("±¾´ÎÖ´ĞĞÉ¾³ıÈÎÎñÍê³É,ÏÂ´ÎÖ´ĞĞÉ¾³ıÈÎÎñ½«ÔÚ"+(tmp/60)+"·ÖÖÓÖ®ºóÖ´ĞĞ...");
-						
+				if(flag){
+					int tmp=intervalEachTime*60;
+					logger.info("æœ¬æ¬¡æ‰§è¡Œåˆ é™¤ä»»åŠ¡å®Œæˆ,ä¸‹æ¬¡æ‰§è¡Œåˆ é™¤ä»»åŠ¡å°†åœ¨"+(tmp/60)+"åˆ†é’Ÿä¹‹åæ‰§è¡Œ...");
+					while(!isStop && tmp>0){
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e1) {
+						} finally{
+							tmp--;
+							if(tmp % 60 ==0)
+								logger.info("æœ¬æ¬¡æ‰§è¡Œåˆ é™¤ä»»åŠ¡å®Œæˆ,ä¸‹æ¬¡æ‰§è¡Œåˆ é™¤ä»»åŠ¡å°†åœ¨"+(tmp/60)+"åˆ†é’Ÿä¹‹åæ‰§è¡Œ...");
+							
+						}
 					}
 				}
+			}
+		}
+
+		/**
+		 *åˆ é™¤æ–‡ä»¶çš„æ“ä½œæ–¹æ³•
+		 */
+		private void deleteFile(String fileId, String filePath) throws SQLException, Exception {
+			try{
+				if(new File(filePath).exists()){
+					new File(filePath).delete();
+					logger.info("ç³»ç»Ÿæç¤º:æ–‡ä»¶["+filePath+"]åˆ é™¤æˆåŠŸ,å…¶æ–‡ä»¶è®°å½•ä¸º["+fileId+"]!");
+				}else{
+					logger.info("ç³»ç»Ÿæç¤º:æ–‡ä»¶["+filePath+"]ä¸å­˜åœ¨,å…¶æ–‡ä»¶è®°å½•ä¸º["+fileId+"]!");
+				}
+			}catch(Exception e){
+				logger.info("ç³»ç»Ÿæç¤º:æ–‡ä»¶["+filePath+"]åˆ é™¤å¤±è´¥,å…¶æ–‡ä»¶è®°å½•ä¸º["+fileId+"]!");
+				throw e;
 			}
 		}
 	}
 	
 	/**
-	 * Ö÷³ÌĞòÈë¿Ú
+	 * ä¸»ç¨‹åºå…¥å£
 	 */
 	public static void main(String[] args) {
 		Client client=new Client();
